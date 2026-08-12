@@ -1,0 +1,21 @@
+import os
+from dotenv import load_dotenv
+from sqlalchemy import create_engine,MetaData #core
+from sqlalchemy.orm import DeclarativeBase, sessionmaker #orm
+
+class Model(DeclarativeBase):
+    metadata = MetaData(naming_convention={
+        "ix": "ix_%(column_0_label)s",
+        "uq": "uq_%(table_name)s_%(column_0_name)s",
+        "ck": "ck_%(table_name)s_%(constraint_name)s",
+        "fk": "fk_%(table_name)s_%(column_0_name)s_%(referred_table_name)s",
+        "pk": "pk_%(table_name)s",
+        }) # core
+
+load_dotenv()
+
+#print('Database URL:', os.environ['DATABASE_URL'])
+engine = create_engine(os.environ["DATABASE_URL"],echo=True)
+Session = sessionmaker(engine)
+#Model.metadata.drop_all(engine)
+#Model.metadata.create_all(engine)
