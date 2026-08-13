@@ -3,4 +3,7 @@ import csv
 with open("products.csv") as f:
     reader = csv.DictReader(f)
     for row in reader:
-        print(row)
+        manufacturer_name = row.pop('manufacturer')
+        print(manufacturer_name)
+
+
