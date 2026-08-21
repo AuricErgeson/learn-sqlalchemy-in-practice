@@ -23,11 +23,25 @@ def main():
                     if manufacturer is None:
                         manufacturer = Manufacturer(name=manufacturer_name)
                         session.add(manufacturer)
-                        session.flush()
+                        #session.commit()
 
-                    row['manufacturer_id'] = manufacturer.id
-                    product = Product(**row)
-                    session.add(product)
+                    #row['manufacturer_id'] = manufacturer.id
+                    manufacturer_id = session.query(Product.id).filter(
+                        Product.manufacturer_id == manufacturer.id,
+                        Product.name == row['name']
+                    ).first()
+                    if manufacturer_id is None:
+
+                        product = Product(
+                            name = row['name'],
+                            manufacturer_id = manufacturer.id,
+                            year = row['year'],
+                            country = row['country'],
+                            cpu=row['cpu'],
+
+                        )
+                        session.add(product)
+                    #session.commit()
 
 
 if __name__ == '__main__':
