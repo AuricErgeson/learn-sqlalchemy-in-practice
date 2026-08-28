@@ -6,3 +6,10 @@
 - one() return only the first and only one result
 
 ## Filters
+
+- or_()
+- where()
+- between()
+
+## Aggregation Functions
+
