@@ -14,7 +14,7 @@ class User(Base):
     comments:Mapped[List['Comment']] = relationship(back_populates='user')
 
     def __repr__(self):
-        return f'<User {self.username}, {self.email_address}>'
+        return f'<User username ={self.username}>'
 
 class Comment(Base):
     __tablename__ = 'comments'
